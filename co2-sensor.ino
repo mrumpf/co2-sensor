@@ -2,19 +2,17 @@
 #include "SSD1306Wire.h"
 #include "OLEDDisplayUi.h"
 #include "Wire.h"
-//#include <SoftwareSerial.h>
 #include "MHZ19.h"                                        
 
-#define NAME "CO2 Ampel"
+#define NAME "CO2 Sensor"
 
 // MHZ
 // pin for uart reading
 #define BAUDRATE 9600  
 MHZ19 myMHZ19;  
-HardwareSerial mySerial(2);                              // (ESP32 Example) create device to MH-Z19 serial
+HardwareSerial mySerial(2);      
 
 // WS2812
-
 //#define LEDS_COUNT  16
 #define LEDS_COUNT  12
 #define LEDS_PIN  4
@@ -75,18 +73,17 @@ void dumpMhz19Version() {
   for(byte i = 0; i < 4; i++)
   {
     Serial.print(myVersion[i]);
-    if(i == 1)
+    if (i == 1)
       Serial.print(".");    
   }
-   Serial.println("");
+  Serial.println("");
 
-   Serial.print("Range: ");
-   Serial.println(myMHZ19.getRange());   
-   Serial.print("Background CO2: ");
-   Serial.println(myMHZ19.getBackgroundCO2());
-   Serial.print("Temperature Cal: ");
-   Serial.println(myMHZ19.getTempAdjustment());
-   //Serial.print("ABC Status: "); myMHZ19.getABC() ? Serial.println("ON") :  Serial.println("OFF");
+  Serial.print("Range: ");
+  Serial.println(myMHZ19.getRange());   
+  Serial.print("Background CO2: ");
+  Serial.println(myMHZ19.getBackgroundCO2());
+  Serial.print("Temperature Cal: ");
+  Serial.println(myMHZ19.getTempAdjustment());
 }
 
 int readCo2Level() { 
@@ -126,8 +123,8 @@ void setLedRingYellow() {
 
 void setLedRingRed() {
   for (int i = 0; i < LEDS_COUNT; i++) {
-      strip.setLedColor(i, 4, 0, 0);
-      delay(50);
+    strip.setLedColor(i, 4, 0, 0);
+    delay(50);
   }
 }
 
